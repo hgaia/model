@@ -4,7 +4,7 @@
     <div id="wrapper">
 
       <!-- Sidebar -->
-      <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+      <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar" v-if="showMenu">
 
           <!-- Sidebar - Brand -->
           <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/home">
@@ -161,7 +161,7 @@
               <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
                   <!-- Sidebar Toggle (Topbar) -->
-                  <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                  <button id="sidebarToggleTop" @click="actionMenu" class="btn btn-link d-md-none rounded-circle mr-3">
                       <i class="fa fa-bars"></i>
                     </button>
 
@@ -356,15 +356,15 @@
 <!-- End of Main Content -->
 
 <!-- Footer -->
+<!-- End of Footer -->
+
 <footer class="sticky-footer bg-white">
     <div class="container my-auto">
         <div class="copyright text-center my-auto">
             <span>Desenvolvido por </span><a target="_blank" href="https://www.tiprimetec.com.br" style="text-decoration: none;color: inherit;">TiPrimetec</a>
         </div>
     </div>
-          </footer>
-          <!-- End of Footer -->
-
+</footer>
       </div>
       <!-- End of Content Wrapper -->
 
@@ -408,7 +408,18 @@ export default {
     return {
       count: 0,
       pusher: null,
-      channel:null
+      channel:null,
+      showMenu: true
+    }
+  },
+  mounted() {
+    if ($(window).width() < 750) {
+                    this.showMenu = false
+                }
+  },
+  methods: {
+    actionMenu(){
+        this.showMenu = !this.showMenu
     }
   }
 }
